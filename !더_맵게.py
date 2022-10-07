@@ -12,34 +12,20 @@ start = time.time()
 # 모든 음식의 스코빌 지수를 K 이상으로 만들 수 없는 경우에는 -1을 return 합니다.
 
 def solution(scoville, K):
-    min_heap = scoville[:]
-    # 최소 힙
+    # 최소힙
     heapq.heapify(scoville)
 
-    # 최소, 차소 값 
-    min_1 = 0
-    min_2 = 0
-
-    # 섞기
-    for i in range(len(scoville)//2):
-        min_1 = min_heap[0]
-        min_2 = min_heap[1]
-
-        if min_2 == 0: return -1
-
-        # 최소 값이 K 보다 크거나 같으면 break
-        if min_1 >= K:
-            break
-        else :
-            heapq.heappush(min_heap, heapq.heappop(min_heap) + heapq.heappop(min_heap)*2)
-
-    return i
+    i = 0
+    # scoville에 값이 있고, scoville의 최솟값이 K보다 작은 동안
+    while len(scoville) >= 2 and scoville[0] < K:
+        heapq.heappush(scoville, heapq.heappop(scoville) + heapq.heappop(scoville)*2)
+        i += 1
+    
+    return -1 if scoville[0] < K else i
 
 
-
-
-
-
-print(solution([1, 2, 3, 9, 10, 12], 7)) # 2
+print(solution([1,2,3], 11)) # 2
+print(solution([5, 2, 3, 15, 5, 12], 12)) # 2
+print(solution([0,0,0,0,0,0], 12)) # 2
 
 print("time :", time.time() - start)
