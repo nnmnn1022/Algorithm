@@ -2,12 +2,8 @@ import time
 start = time.time()
 
 def solution(A):
-    dic = {}
-    for a in A:
-        if dic[a]:
-            dic[a] += 1
-        else :
-            dic[a] = 1
+    li1 = list(set(A))
+    li2 = li1[:]
 
     for a in A:
         if dic[a] == 1:
