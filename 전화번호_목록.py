@@ -1,11 +1,20 @@
 import time
 start = time.time()
 
+# def solution(phone_book):
+#     phone_book = sorted(phone_book)
+#     for i in range(len(phone_book)):
+#         if i+1 < len(phone_book) and phone_book[i+1].startswith(phone_book[i]):
+#                 return False
+
+#     return True
+
 def solution(phone_book):
-    phone_book = sorted(phone_book)
-    for i in range(len(phone_book)):
-        if i+1 < len(phone_book) and phone_book[i+1].startswith(phone_book[i]):
-                return False
+    pb = sorted(phone_book)
+    len_pb = len(pb)
+    for i, a in enumerate(pb):
+        if len_pb > i+1 and pb[i+1].startswith(a):
+            return False
 
     return True
 
