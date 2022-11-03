@@ -13,7 +13,7 @@ def solution(n, m):
         b = r
     GCD = a
 
-    # 두 수 a와 b의 최소공배수는 a와 b의 곱을 a와 b의 최대공약수를 나눈 것과 같다.
+    # 두 수 a와 b의 최소공배수는 a와 b의 곱을 a와 b의 최대공약수로 나눈 것과 같다.
     LCM = n * m // GCD 
 
     return [GCD, LCM]
