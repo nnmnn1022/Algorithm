@@ -31,25 +31,51 @@ start = time.time()
 #     return answer
 
 
-def solution(progresses, speeds):
-    print(progresses)
-    print(speeds)
-    answer = []
-    time = 0
-    count = 0
-    while len(progresses)> 0:
-        if (progresses[0] + time*speeds[0]) >= 100:
-            progresses.pop(0)
-            speeds.pop(0)
-            count += 1
-        else:
-            if count > 0:
-                answer.append(count)
-                count = 0
-            time += 1
-    answer.append(count)
-    return answer
+# def solution(progresses, speeds):
+#     print(progresses)
+#     print(speeds)
+#     answer = []
+#     time = 0
+#     count = 0
+#     while len(progresses)> 0:
+#         if (progresses[0] + time*speeds[0]) >= 100:
+#             progresses.pop(0)
+#             speeds.pop(0)
+#             count += 1
+#         else:
+#             if count > 0:
+#                 answer.append(count)
+#                 count = 0
+#             time += 1
+#     answer.append(count)
+#     return answer
 
+
+# 2022.11.04 복습
+def solution(progresses, speeds):
+    day = 0
+    publish_num = 0
+    answer = []
+    # 가장 먼저 배포되어야 하는 프로젝트가 100%가 되었을 때
+    # publish가 몇 개 되는지 확인해서 answer에 push
+
+    for i in range(len(progresses)):
+        
+        if publish_num == 0:
+            day = -((progresses[i] - 100) // speeds[i])
+            publish_num += 1
+
+        elif progresses[i] + day*speeds[i] >= 100:
+            publish_num += 1
+
+        else:
+            answer.append(publish_num)
+            day = -((progresses[i] - 100) // speeds[i])
+            publish_num = 1
+
+    answer.append(publish_num)
+
+    return answer
 
 # print(solution(2)) # 1
 print(solution([93, 30, 55], [1, 30, 5])) # [2, 1]
